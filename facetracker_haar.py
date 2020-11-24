@@ -34,7 +34,7 @@ haar_scale = 1.2
 min_neighbors = 2
 haar_flags = cv2.CASCADE_DO_CANNY_PRUNING
 
-cap = cv2.CreateCameraCapture(0)
+cap = cv2.VideoCapture(0)
 cv2.NamedWindow("Tracker", 1)
  
 if cap:
