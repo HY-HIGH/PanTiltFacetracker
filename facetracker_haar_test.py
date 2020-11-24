@@ -42,7 +42,7 @@ if cap:
     
 while(True):
     # Capture frame-by-frame
-    frame = cv2.QueryFrame(cap)
+    ret, frame = cap.read()
     if not frame:
         cv2.WaitKey(0)
         break
@@ -50,28 +50,27 @@ while(True):
         frame_copy = cv2.CreateImage((frame.width,frame.height),
                                             cv2.IPL_DEPTH_8U, frame.nChannels)
     if frame.origin == cv2.IPL_ORIGIN_TL:
-        cv2.Flip(frame, frame, -1)
+        frame = cv2.flip(frame, -1)
    
     # Our operations on the frame come here
-    gray = cv2.CreateImage((frame.width,frame.height), 8, 1)
-    small_img = cv2.CreateImage((cv2.Round(frame.width / image_scale),
-                   cv2.Round (frame.height / image_scale)), 8, 1)
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    # small_img = cv2.CreateImage((cv2.Round(frame.width / image_scale),
+    #                cv2.Round (frame.height / image_scale)), 8, 1)
  
     # convert color input image to grayscale
-    cv2.CvtColor(frame, gray, cv2.CV_BGR2GRAY)
+    cv2.cvtColor(frame, gray, cv2.CV_BGR2GRAY)
  
     # scale input image for faster processing
-    cv2.Resize(gray, small_img, cv2.CV_INTER_LINEAR)
+    # cv2.Resize(gray, small_img, cv2.CV_INTER_LINEAR)
  
-    cv2.EqualizeHist(small_img, small_img)
+    # cv2.EqualizeHist(small_img, small_img)
 
     midFace = None
  
     if(cascade):
         t = cv2.GetTickCount()
         # HaarDetectObjects takes 0.02s
-        faces = cv2.HaarDetectObjects(small_img, cascade, cv2.CreateMemStorage(0),
-                                     haar_scale, min_neighbors, haar_flags, min_size)
+        faces = cascade.detectMultiScale(gray, scaleFactor = 1.5, minNeighbors = 5)
         t = cv2.GetTickCount() - t
         if faces:
             lights(50 if len(faces) == 0 else 0, 50 if len(faces) > 0 else 0,0,50)
