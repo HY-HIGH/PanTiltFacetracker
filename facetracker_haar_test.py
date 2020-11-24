@@ -63,10 +63,8 @@ while(True):
     midFace = None
  
     if(cascade):
-        t = cv2.GetTickCount()
         # HaarDetectObjects takes 0.02s
         faces = cascade.detectMultiScale(gray, scaleFactor = 1.5, minNeighbors = 5)
-        t = cv2.GetTickCount() - t
         if faces:
             lights(50 if len(faces) == 0 else 0, 50 if len(faces) > 0 else 0,0,50)
 
@@ -103,7 +101,7 @@ while(True):
                 break
                 
     # Display the resulting frame
-    cv2.ShowImage('Tracker',frame)
+    cv2.imshow('Tracker',frame)
     if cv2.WaitKey(1) & 0xFF == ord('q'):
         break
 
