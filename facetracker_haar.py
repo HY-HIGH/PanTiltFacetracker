@@ -32,7 +32,7 @@ min_size = (15, 15)
 image_scale = 5
 haar_scale = 1.2
 min_neighbors = 2
-haar_flags = cv2.CV_HAAR_DO_CANNY_PRUNING
+haar_flags = cv2.cv.CV_HAAR_DO_CANNY_PRUNING
 
 cap = cv2.CreateCameraCapture(0)
 cv2.NamedWindow("Tracker", 1)
