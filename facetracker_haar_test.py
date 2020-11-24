@@ -102,7 +102,8 @@ while(True):
                 
     # Display the resulting frame
     cv2.imshow('Tracker',frame)
-    if cv2.WaitKey(1) & 0xFF == ord('q'):
+    k = cv2.waitKey(30) & 0xff
+    if k == 27:
         break
 
 # When everything done, release the capture
