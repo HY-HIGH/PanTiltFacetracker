@@ -43,14 +43,10 @@ if cap:
 while(True):
     # Capture frame-by-frame
     ret, frame = cap.read()
-    if not frame:
-        cv2.WaitKey(0)
+    if frame is None:
+        cv2.waitKey(0)
         break
-    if not frame_copy:
-        frame_copy = cv2.CreateImage((frame.width,frame.height),
-                                            cv2.IPL_DEPTH_8U, frame.nChannels)
-    if frame.origin == cv2.IPL_ORIGIN_TL:
-        frame = cv2.flip(frame, -1)
+    
    
     # Our operations on the frame come here
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
