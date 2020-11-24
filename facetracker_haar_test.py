@@ -54,7 +54,6 @@ while(True):
     #                cv2.Round (frame.height / image_scale)), 8, 1)
  
     # convert color input image to grayscale
-    cv2.cvtColor(frame, gray, cv2.CV_BGR2GRAY)
  
     # scale input image for faster processing
     # cv2.Resize(gray, small_img, cv2.CV_INTER_LINEAR)
